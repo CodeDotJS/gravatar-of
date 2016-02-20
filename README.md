@@ -1,2 +1,3 @@
-# gravatar
-Download gravatar images of any user.
+# gravatar-of
+
+> Download gravatar images of any user.
