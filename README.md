@@ -31,13 +31,13 @@ $ image-of -u /rushforlinux@gmail.com -n rishi
 
     $ image-of -u /rushforlinux@gmail.com -n rishi 
 
-	❭ Directory Created 	:✔
+	❭ Directory Created       :   ✔
 
-	❭ Downloading 			:✔
+	❭ Downloading             :   ✔
 
-	❭ Directory Created 	:✔
-	
-	❭ Image Saved in 		:Images ❭❭ rishi.jpg
+	❭ Directory Created       :   ✔
+
+	❭ Image Saved in          :   Images ❭❭ rishi.jpg
 
 ```
 ## Screenshot
