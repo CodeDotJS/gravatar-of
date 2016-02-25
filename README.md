@@ -1,5 +1,5 @@
 <h1 align="center">
-<img src="http://rishigiri.com/github/garve.png"></img>
+<img src="https://raw.githubusercontent.com/rishigiridotcom/rishigiri.com/72b74d470d1f7b63ed1496bc335e7f257a9f25ca/github/grave.png"></img>
 <br>
 </h1>
 
