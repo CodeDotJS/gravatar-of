@@ -1,5 +1,5 @@
 <h1 align="center">
-<img src="http://rishigiri.com/github/gravatar.png"></img>
+<img src="https://raw.githubusercontent.com/rishigiridotcom/rishigiri.com/gh-pages/github/gravatar.png"></img>
 <br>
 </h1>
 
