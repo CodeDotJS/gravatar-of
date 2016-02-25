@@ -1,6 +1,5 @@
-<h1 align="center"> Gravatar-of </h1>
 <h1 align="center">
-<img src="https://raw.githubusercontent.com/rishigiridotcom/rishigiri.com/72b74d470d1f7b63ed1496bc335e7f257a9f25ca/github/grave.png"></img>
+<img src="http://rishigiri.com/github/gravism.png"></img>
 <br>
 </h1>
 
