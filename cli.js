@@ -28,5 +28,16 @@ const argv = require('yargs')
 	.describe('n', 'Name of Image')
 	.argv;
 
+const saveImage = "./Gravatar/";
+
+const removeSlash = saveImage.replace("./", '');
+
+mkdirp(saveImage, function (err) {
+	if (err) {
+		console.error(err);
+	} else {
+		console.log('\n\t ❭ Directory Created 	:'.directory + '    ✔'.normal);
+	}
+});
 
 const hashEmail = md5(argv.u);
