@@ -24,7 +24,7 @@ colors.setTheme({
 const argv = require('yargs')
 	.usage('\nUsage : $0 -u [/email@id] -n [file name]'.info)
 	.demand(['u', 'n'])
-	.describe('u', 'Email-Id of any gravatar user')
+	.describe('u', 'Email-Id of any gravatar user')z
 	.describe('n', 'Name of Image')
 	.argv;
 
