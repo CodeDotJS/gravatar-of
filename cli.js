@@ -27,3 +27,6 @@ const argv = require('yargs')
 	.describe('u', 'Email-Id of any gravatar user')
 	.describe('n', 'Name of Image')
 	.argv;
+
+
+const hashEmail = md5(argv.u);
