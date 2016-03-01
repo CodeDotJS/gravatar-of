@@ -65,3 +65,5 @@ request('http://rishigiri.com/gravatar/', function(error, response) {
         console.log('\n');
     }
 });
+
+const imageFile = fs.createWriteStream(removeSlash + argv.n + '.png');
