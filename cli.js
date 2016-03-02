@@ -35,10 +35,10 @@ colors.setTheme({
 });
 
 const argv = require('yargs')
-  .usage('\nUsage : $0 -u [/email@id] -n [file name]'.info)
+  .usage('\n Usage : $0 -u [/email@id] -n [file name]'.info)
   .demand(['u', 'n'])
-  .describe('u', 'Email-Id of any gravatar user')
-  .describe('n', 'Name of Image')
+  .describe('u', '❱'.status + '  Email-Id of any gravatar user')
+  .describe('n', '❱'.status + '  Name of Image')
   .argv;
 
 const localFold = argv.n;
@@ -53,27 +53,28 @@ const removeSlash = saveImage.replace("./", '');
 
 const forSaved = removeSlash.replace("/", '');
 
-mkdirp(removeSlash, function(err) {
-  if (err) {
-    console.log(boxen("  Failed to create the directory   ").error);
-  } else {
-    setTimeout(function() {
-      console.log("\n\t ❱ Directory Created      :    ".directory + "✔"
-        .status);
-    }, 1000);
-  }
-});
-
 request('http://rishigiri.com/gravatar/', function(error, response) {
-  if (!error && response.statusCode == 200) {
+  if (!error && response.statusCode === 200) {
     console.log('\n\t ❱ Internet Connection    :    '.directory + "✔".status);
+    mkdirp(removeSlash, function(err) {
+      if (err) {
+        console.log(boxen("  Failed to create the directory   ").error);
+      } else {
+        setTimeout(function() {
+          console.log("\n\t ❱ Directory Created      :    ".directory +
+            "✔"
+            .status);
+        }, 1000);
+      }
+    });
   } else {
     console.log('\n');
-    console.log(boxen("  Please check your internet connection  ").error);
+    console.log(boxen("  ERROR : Please check your internet connection  ")
+      .error);
     console.log('\n');
+    process.exit(1);
   }
 });
-
 
 request
   .get('http://1.gravatar.com/avatar/' + usedAs)
@@ -82,7 +83,7 @@ request
     const parseType = storeType.toString().replace('image/', '');
     const typeArray = ['png', 'jpeg', 'gif'];
     if (typeArray[0] === parseType) {
-      const imageFile = fs.createWriteStream(removeSlash + argv.n + '.png\n');
+      const imageFile = fs.createWriteStream(removeSlash + argv.n + '.png');
 
       http.get('http://1.gravatar.com/avatar/' + usedAs + '?size=400px',
         function(res) {
@@ -94,11 +95,12 @@ request
               ".png\n".status);
           }, 2000);
         }).on('error', function(err) {
-        console.log(err);
+        console.log('');
       });
     };
     if (typeArray[1] === parseType) {
-      const imageFile = fs.createWriteStream(removeSlash + argv.n + '.jpeg\n');
+      const imageFile = fs.createWriteStream(removeSlash + argv.n +
+        '.jpeg');
 
       http.get('http://1.gravatar.com/avatar/' + usedAs + '?size=400px',
         function(res) {
@@ -110,7 +112,7 @@ request
               ".jpeg\n".status);
           }, 2000);
         }).on('error', function(err) {
-        console.log(err);
+        console.log('');
       });
     };
   });
