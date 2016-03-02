@@ -96,7 +96,7 @@ request
        '.png\n'.status);
      }, 2000);
     }).on('error', function(err) {
-    console.log('');
+    console.log(err);
    });
   };
   if (typeArray[1] === parseType) {
@@ -113,7 +113,7 @@ request
        '.jpeg\n'.status);
      }, 2000);
     }).on('error', function(err) {
-    console.log('');
+    console.log(err);
    });
   }
  });
