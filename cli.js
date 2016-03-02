@@ -5,41 +5,42 @@
 /* dependencies */
 
 const fs = require('fs');
-const http = require('follow-redirects').http; // just in case
+const http = require('follow-redirects').http;
 const mkdirp = require('mkdirp');
 const md5 = require('md5');
 const Parse = require('jsonparse');
 const boxen = require('boxen');
 const request = require('request');
 const https = require('https');
+const cheerio = require('cheerio');
 const colors = require('colors');
 
 colors.setTheme({
-  directory: ['cyan', 'bold']
+ directory: ['cyan', 'bold']
 });
 
 colors.setTheme({
-  info: ['cyan', 'bold']
+ info: ['cyan', 'bold']
 });
 
 colors.setTheme({
-  status: ['green', 'bold']
+ status: ['green', 'bold']
 });
 
 colors.setTheme({
-  normal: ['red', 'bold']
+ normal: ['red', 'bold']
 });
 
 colors.setTheme({
-  error: ['red', 'bold']
+ error: ['red', 'bold']
 });
 
 const argv = require('yargs')
-  .usage('\n Usage : $0 -u [/email@id] -n [file name]'.info)
-  .demand(['u', 'n'])
-  .describe('u', '❱'.status + '  Email-Id of any gravatar user')
-  .describe('n', '❱'.status + '  Name of Image')
-  .argv;
+ .usage('\n Usage : $0 -u [/email@id] -n [file name]'.info)
+ .demand(['u', 'n'])
+ .describe('u', '❱'.status + '  Email-Id of any gravatar user')
+ .describe('n', '❱'.status + '  Name of Image')
+ .argv;
 
 const localFold = argv.n;
 
@@ -54,65 +55,65 @@ const removeSlash = saveImage.replace('./', '');
 const forSaved = removeSlash.replace('/', '');
 
 request('http://rishigiri.com/gravatar/', function(error, response) {
-  if (!error && response.statusCode === 200) {
-    console.log('\n\t ❱ Internet Connection    :    '.directory + '✔'.status);
-    mkdirp(removeSlash, function(err) {
-      if (err) {
-        console.log(boxen('  Failed to create the directory   ').error);
-      } else {
-        setTimeout(function() {
-          console.log('\n\t ❱ Directory Created      :    '.directory +
-            '✔'
-            .status);
-        }, 1000);
-      }
-    });
-  } else {
-    console.log('\n');
-    console.log(boxen('  ERROR : Please check your internet connection  ')
-      .error);
-    console.log('\n');
-    process.exit(1);
-  }
+ if (!error && response.statusCode === 200) {
+  console.log('\n\t ❱ Internet Connection    :    '.directory + '✔'.status);
+  mkdirp(removeSlash, function(err) {
+   if (err) {
+    console.log(boxen('  Failed to create the directory   ').error);
+   } else {
+    setTimeout(function() {
+     console.log('\n\t ❱ Directory Created      :    '.directory +
+      '✔'
+      .status);
+    }, 1000);
+   }
+  });
+ } else {
+  console.log('\n');
+  console.log(boxen('  ERROR : Please check your internet connection  ')
+   .error);
+  console.log('\n');
+  process.exit(1);
+ }
 });
 
 request
-  .get('http://1.gravatar.com/avatar/' + usedAs)
-  .on('response', function(response) {
-    const storeType = response.headers['content-type'];
-    const parseType = storeType.toString().replace('image/', '');
-    const typeArray = ['png', 'jpeg', 'gif'];
-    if (typeArray[0] === parseType) {
-      const imageFile = fs.createWriteStream(removeSlash + argv.n + '.png');
+ .get('http://1.gravatar.com/avatar/' + usedAs)
+ .on('response', function(response) {
+  const storeType = response.headers['content-type'];
+  const parseType = storeType.toString().replace('image/', '');
+  const typeArray = ['png', 'jpeg', 'gif'];
+  if (typeArray[0] === parseType) {
+   const imageFile = fs.createWriteStream(removeSlash + argv.n + '.png');
 
-      http.get('http://1.gravatar.com/avatar/' + usedAs + '?size=400px',
-        function(res) {
-          res.pipe(imageFile);
-          setTimeout(function() {
-            console.log('\n\t ❱ Image Saved In         :    '.directory +
-              forSaved.toString().status + ' ❱ ' + localFold.toString()
-              .status +
-              '.png\n'.status);
-          }, 2000);
-        }).on('error', function(err) {
-        console.log('');
-      });
-    };
-    if (typeArray[1] === parseType) {
-      const imageFile = fs.createWriteStream(removeSlash + argv.n +
-        '.jpeg');
+   http.get('http://1.gravatar.com/avatar/' + usedAs + '?size=400px',
+    function(res) {
+     res.pipe(imageFile);
+     setTimeout(function() {
+      console.log('\n\t ❱ Image Saved In         :    '.directory +
+       forSaved.toString().status + ' ❱ ' + localFold.toString()
+       .status +
+       '.png\n'.status);
+     }, 2000);
+    }).on('error', function(err) {
+    console.log('');
+   });
+  };
+  if (typeArray[1] === parseType) {
+   const imageFile = fs.createWriteStream(removeSlash + argv.n +
+    '.jpeg');
 
-      http.get('http://1.gravatar.com/avatar/' + usedAs + '?size=400px',
-        function(res) {
-          res.pipe(imageFile);
-          setTimeout(function() {
-            console.log('\n\t ❱ Image Saved In         :    '.directory +
-              forSaved.toString().status + ' ❱ ' + localFold.toString()
-              .status +
-              '.jpeg\n'.status);
-          }, 2000);
-        }).on('error', function(err) {
-        console.log('');
-      });
-    }
-  });
+   http.get('http://1.gravatar.com/avatar/' + usedAs + '?size=400px',
+    function(res) {
+     res.pipe(imageFile);
+     setTimeout(function() {
+      console.log('\n\t ❱ Image Saved In         :    '.directory +
+       forSaved.toString().status + ' ❱ ' + localFold.toString()
+       .status +
+       '.jpeg\n'.status);
+     }, 2000);
+    }).on('error', function(err) {
+    console.log('');
+   });
+  }
+ });
