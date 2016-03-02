@@ -91,7 +91,7 @@ request
             console.log("\n\t ❱ Image Saved In         :    ".directory +
               forSaved.toString().status + " ❱ " + localFold.toString()
               .status +
-              "\n".status);
+              ".png\n".status);
           }, 2000);
         }).on('error', function(err) {
         console.log(err);
@@ -107,7 +107,7 @@ request
             console.log("\n\t ❱ Image Saved In         :    ".directory +
               forSaved.toString().status + " ❱ " + localFold.toString()
               .status +
-              "\n".status);
+              ".jpeg\n".status);
           }, 2000);
         }).on('error', function(err) {
         console.log(err);
