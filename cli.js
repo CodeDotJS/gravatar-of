@@ -24,7 +24,7 @@ colors.setTheme({
 
 colors.setTheme({
   status: ['green', 'bold']
-})
+});
 
 colors.setTheme({
   normal: ['red', 'bold']
@@ -47,29 +47,29 @@ const hashEmail = md5(argv.u);
 
 const usedAs = hashEmail;
 
-const saveImage = "./Gravatar/";
+const saveImage = './Gravatar/';
 
-const removeSlash = saveImage.replace("./", '');
+const removeSlash = saveImage.replace('./', '');
 
-const forSaved = removeSlash.replace("/", '');
+const forSaved = removeSlash.replace('/', '');
 
 request('http://rishigiri.com/gravatar/', function(error, response) {
   if (!error && response.statusCode === 200) {
-    console.log('\n\t ❱ Internet Connection    :    '.directory + "✔".status);
+    console.log('\n\t ❱ Internet Connection    :    '.directory + '✔'.status);
     mkdirp(removeSlash, function(err) {
       if (err) {
-        console.log(boxen("  Failed to create the directory   ").error);
+        console.log(boxen('  Failed to create the directory   ').error);
       } else {
         setTimeout(function() {
-          console.log("\n\t ❱ Directory Created      :    ".directory +
-            "✔"
+          console.log('\n\t ❱ Directory Created      :    '.directory +
+            '✔'
             .status);
         }, 1000);
       }
     });
   } else {
     console.log('\n');
-    console.log(boxen("  ERROR : Please check your internet connection  ")
+    console.log(boxen('  ERROR : Please check your internet connection  ')
       .error);
     console.log('\n');
     process.exit(1);
@@ -89,10 +89,10 @@ request
         function(res) {
           res.pipe(imageFile);
           setTimeout(function() {
-            console.log("\n\t ❱ Image Saved In         :    ".directory +
-              forSaved.toString().status + " ❱ " + localFold.toString()
+            console.log('\n\t ❱ Image Saved In         :    '.directory +
+              forSaved.toString().status + ' ❱ ' + localFold.toString()
               .status +
-              ".png\n".status);
+              '.png\n'.status);
           }, 2000);
         }).on('error', function(err) {
         console.log('');
@@ -106,13 +106,13 @@ request
         function(res) {
           res.pipe(imageFile);
           setTimeout(function() {
-            console.log("\n\t ❱ Image Saved In         :    ".directory +
-              forSaved.toString().status + " ❱ " + localFold.toString()
+            console.log('\n\t ❱ Image Saved In         :    '.directory +
+              forSaved.toString().status + ' ❱ ' + localFold.toString()
               .status +
-              ".jpeg\n".status);
+              '.jpeg\n'.status);
           }, 2000);
         }).on('error', function(err) {
         console.log('');
       });
-    };
+    }
   });
