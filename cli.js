@@ -107,7 +107,9 @@ request
 			res => {
 				res.pipe(imageFile);
 				setTimeout(() => {
-					console.log('\n\t ❱ Image Saved In         :    '.directory + forSaved.toString().status + ' ❱ ' + localFold.toString().status + '.jpeg\n'.status);
+					console.log('\n\t ❱ Image Saved In         :    '.directory +
+						forSaved.toString().status + ' ❱ ' + localFold.toString().status +
+						'.jpeg\n'.status);
 				}, 2000);
 			}).on('error', err => {
 				console.log(err);
