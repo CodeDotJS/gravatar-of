@@ -123,3 +123,4 @@ function removeString(emailAddress) {
 
 const replacedString = removeString(argv.u);
 
+console.log(boxen(' USERNAME : ' + replacedString.toLowerCase() + ' ').status);
