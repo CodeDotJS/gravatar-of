@@ -39,6 +39,9 @@
     "follow-redirects": "*",
     "colors": "*",
     "mkdirp": "*",
+    "boxen":"*",
+    "md5":"*",
+    "request":"*",
     "yargs": "*"
   },
   "devDependencies": {
