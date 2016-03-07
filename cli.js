@@ -41,8 +41,8 @@ colors.setTheme({
 const argv = require('yargs')
 	.usage('\n Usage : $0 -u [/email@id] -n [file name]'.info)
 	.demand(['u', 'n'])
-	.describe('u', '❱'.status + '  Email-Id of any gravatar user')
-	.describe('n', '❱'.status + '  Name of Image')
+	.describe('u' + '❱'.status + '  Email-Id of any gravatar user')
+	.describe('n' + '❱'.status + '  Name of Image')
 	.argv;
 
 const localFold = argv.n;
