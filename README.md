@@ -24,20 +24,18 @@ $ image-of -u /rushforlinux@gmail.com -n rishi
 
               Options:
 
-                 -u    Email ID 							 [required]
+                 -u    Email ID                         [required]
 
-                 -n    save image as [ unicorn ]             [required]
+                 -n    save image as [ unicorn ]        [required]
 
 
     $ image-of -u /rushforlinux@gmail.com -n rishi 
 
-	❭ Directory Created       :   ✔
+    ❱ Internet Connection        :     ✔
 
-	❭ Downloading             :   ✔
+    ❱ Directory Created          :     ✔
 
-	❭ Directory Created       :   ✔
-
-	❭ Image Saved in          :   Images ❭❭ rishi.jpg
+    ❱ Image Saved In             :     Gravatar ❱ true.jpeg
 
 ```
 ## Screenshot
