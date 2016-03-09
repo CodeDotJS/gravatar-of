@@ -8,7 +8,7 @@ const fs = require('fs');
 const http = require('follow-redirects').http;
 const mkdirp = require('mkdirp');
 const md5 = require('md5');
-const Parse = require('jsonparse');
+// const Parse = require('jsonparse');
 const request = require('request');
 const boxen = require('boxen');
 const cheerio = require('cheerio');
@@ -69,8 +69,6 @@ function removeString(emailAddress) {
 // stored argument
 const replacedString = removeString(argv.u);
 
-console.log('Finding and Downloading Data of : ', replacedString);
-
 mkdirp(removeSlash, err => {
 	if (err) {
 		console.error(boxen('  Failed to create the directory   ').error);
@@ -100,6 +98,8 @@ request('http://rishigiri.com/gravatar/', (error, response) => {
 	}
 });
 
+console.log('\n  Fetching'.status, replacedString.toString().info, '\'s'.info,
+	'gravatar data.'.status);
 // requesting for image with hashed email address which was previously stored in 'usedAs'
 
 request
@@ -131,15 +131,37 @@ request
 						'.png\n'.status);
 				}, 2000);
 			}).on('error', err => {
-				console.log(err);
-			});
+			console.log(err);
+		});
+		// Parsing the HTML content for getting user's data.
+		setTimeout(() => {
+			function getProfile() {
+				request('http://en.gravatar.com/' + replacedString, (error, response,
+					html) => {
+					if (!error && response.statusCode === 200) {
+						const $ = cheerio.load(html);
+						return {
+							name: console.log(boxen(' Name : '.info + $('h2.fn').text().toString()
+								.info + ' ').status) || null,
+							place: console.log(boxen(' Location :'.info + $('p.location').text()
+								.toString()
+								.info + ' ').status) || null,
+							bio: console.log(boxen(' Bio '.info + $('p.description').text().trim()
+								.replace('br', '').toString().info + ' ').status) || null,
+							twitter: $('a.accounts_twitter').attr('href') || null,
+							blogger: $('a.accounts_blogger').attr('href') || null
+						};
+					}
+				});
+			}
+			getProfile();
+		}, 5000);
 	} else {
 		/* something to be done */
 	}
 	// checking if the remote image if jpg/jpeg
 	if (response.statusCode === 200 && typeArray[1] === parseType) {
 		const imageFile = fs.createWriteStream(removeSlash + argv.n + '.jpeg');
-
 		http.get('http://1.gravatar.com/avatar/' + usedAs + '?size=400px',
 			res => {
 				res.pipe(imageFile);
@@ -149,11 +171,32 @@ request
 						'.jpeg\n'.status);
 				}, 2000);
 			}).on('error', err => {
-				console.log(err);
-			});
+			console.log(err);
+		});
+		// Parsing the HTML content for getting user's data.
+		setTimeout(() => {
+			function getProfile() {
+				request('http://en.gravatar.com/' + replacedString, (error, response,
+					html) => {
+					if (!error && response.statusCode === 200) {
+						const $ = cheerio.load(html);
+						return {
+							name: console.log(boxen(' Name : '.info + $('h2.fn').text().toString()
+								.info + ' ').status) || null,
+							place: console.log(boxen(' Location :'.info + $('p.location').text()
+								.toString()
+								.info + ' ').status) || null,
+							bio: console.log(boxen(' Bio '.info + $('p.description').text().trim()
+								.replace('br', '').toString().info + ' ').status) || null,
+							twitter: $('a.accounts_twitter').attr('href') || null,
+							blogger: $('a.accounts_blogger').attr('href') || null
+						};
+					}
+				});
+			}
+			getProfile();
+		}, 5000);
 	} else {
 		/* do something */
 	}
 });
-
-// loading the HTML / xml for parsing the vlaues 
