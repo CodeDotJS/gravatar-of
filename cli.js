@@ -69,6 +69,8 @@ function removeString(emailAddress) {
 // stored argument
 const replacedString = removeString(argv.u);
 
+console.log('Finding and Downloading Data of : ', replacedString);
+
 mkdirp(removeSlash, err => {
 	if (err) {
 		console.error(boxen('  Failed to create the directory   ').error);
@@ -153,3 +155,5 @@ request
 		/* do something */
 	}
 });
+
+// loading the HTML / xml for parsing the vlaues 
