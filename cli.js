@@ -70,6 +70,8 @@ function removeString(emailAddress) {
 	return emailAddress.replace(/\@.*/, '');
 }
 
+// removing the google.plus text from the url
+
 // stored argument
 const replacedString = removeString(argv.u);
 
@@ -161,23 +163,22 @@ request
 
 							twitter: console.log(' Twitter   :    '.info + $(
 									'a.accounts_twitter')
-								.attr('href')
+								.text()
 								.toString().description, '\n'
 							) || null,
 
 							facebook: console.log(' Facebook  :    '.info + $(
-										'a.accounts_facebook').attr('href')
+										'a.accounts_facebook').text()
 									.toString().description,
 									'\n') ||
 								null,
 
-							googlePlus: console.log(' Google +  :    '.info + $(
-								'a.accounts_google').attr('href')
-							.toString().description,
+							googlePlus: console.log(' Google +  :    '.info + parseInt($(
+								'a.accounts_google').text()).toString().replace(/\D/g,'').description,
 							'\n') || null,
 
 							linkedIn: console.log(' LinkedIn  :    '.info + $(
-								'a.accounts_linkedin').attr('href')
+								'a.accounts_linkedin').text()
 							.toString().description,
 							'\n') || null
 						};
@@ -226,23 +227,23 @@ request
 
 							twitter: console.log(' Twitter   :    '.info + $(
 									'a.accounts_twitter')
-								.attr('href')
+								.text()
 								.toString().description, '\n'
 							) || null,
 
 							facebook: console.log(' Facebook  :    '.info + $(
-										'a.accounts_facebook').attr('href')
+										'a.accounts_facebook').text()
 									.toString().description,
 									'\n') ||
 								null,
 
 							googlePlus: console.log(' Google +  :    '.info + $(
-								'a.accounts_google').attr('href')
+								'a.accounts_google').text()
 							.toString().description,
 							'\n') || null,
 
 							linkedIn: console.log(' LinkedIn  :    '.info + $(
-								'a.accounts_linkedin').attr('href')
+								'a.accounts_linkedin').text()
 							.toString().description,
 							'\n') || null
 						};
