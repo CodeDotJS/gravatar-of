@@ -19,6 +19,10 @@ colors.setTheme({
 });
 
 colors.setTheme({
+	description: ['green', 'bold']
+});
+
+colors.setTheme({
 	info: ['cyan', 'bold']
 });
 
@@ -60,7 +64,7 @@ const removeSlash = saveImage.replace('./', '');
 const forSaved = removeSlash.replace('/', '');
 
 // finding username based on email address
-
+// will show the user's data only if the gravatar user name of a person is starting chars of his email before '@'
 function removeString(emailAddress) {
 	// removing everything after '@', basic strategy used by gravtar for username
 	return emailAddress.replace(/\@.*/, '');
@@ -79,6 +83,7 @@ mkdirp(removeSlash, err => {
 request('http://rishigiri.com/gravatar/', (error, response) => {
 	if (!error && response.statusCode === 200) {
 		console.log('\n\t ❱ Internet Connection    :    '.directory + '✔'.status);
+		// another with same name
 		mkdirp(removeSlash, err => {
 			if (err) {
 				console.log(boxen('  Failed to create the directory   ').error);
@@ -131,25 +136,42 @@ request
 						'.png\n'.status);
 				}, 2000);
 			}).on('error', err => {
-			console.log(err);
-		});
+				console.log(err);
+			});
 		// Parsing the HTML content for getting user's data.
 		setTimeout(() => {
 			function getProfile() {
 				request('http://en.gravatar.com/' + replacedString, (error, response,
 					html) => {
 					if (!error && response.statusCode === 200) {
+						// loading the whole HTML
 						const $ = cheerio.load(html);
 						return {
-							name: console.log(boxen(' Name : '.info + $('h2.fn').text().toString()
-								.info + ' ').status) || null,
-							place: console.log(boxen(' Location :'.info + $('p.location').text()
+							// returning the datas
+							name: console.log(' Name      :     '.info + $('h2.fn').text().toString()
+								.description, '\n') || null,
+
+							place: console.log(' Location  :     '.info + $('p.location').text()
 								.toString()
-								.info + ' ').status) || null,
-							bio: console.log(boxen(' Bio '.info + $('p.description').text().trim()
-								.replace('br', '').toString().info + ' ').status) || null,
-							twitter: $('a.accounts_twitter').attr('href') || null,
-							blogger: $('a.accounts_blogger').attr('href') || null
+								.description, '\n') || null,
+
+							bio: console.log(' Bio       :     '.info + $('p.description').text()
+									.trim().replace('<br>', '').toString().description, '\n') ||
+								null,
+
+							twitter: console.log(' Twitter   :     '.info + $(
+									'a.accounts_twitter')
+								.attr('href')
+								.toString().replace('http://twitter.com/', '').description, '\n'
+							) || null,
+
+							facebook: console.log(' Facebook  :     '.info + $(
+										'a.accounts_facebook').attr('href')
+									.toString().replace('https://www.facebook.com/', '').description,
+									'\n') ||
+								null,
+
+							blogger: console.log($('a.accounts_blogger').attr('href')) || null
 						};
 					}
 				});
@@ -157,7 +179,7 @@ request
 			getProfile();
 		}, 5000);
 	} else {
-		/* something to be done */
+		/* something to be done | but no need */
 	}
 	// checking if the remote image if jpg/jpeg
 	if (response.statusCode === 200 && typeArray[1] === parseType) {
@@ -171,25 +193,42 @@ request
 						'.jpeg\n'.status);
 				}, 2000);
 			}).on('error', err => {
-			console.log(err);
-		});
+				console.log(err);
+			});
 		// Parsing the HTML content for getting user's data.
 		setTimeout(() => {
 			function getProfile() {
 				request('http://en.gravatar.com/' + replacedString, (error, response,
 					html) => {
 					if (!error && response.statusCode === 200) {
+						// loading the whole HTML
 						const $ = cheerio.load(html);
 						return {
-							name: console.log(boxen(' Name : '.info + $('h2.fn').text().toString()
-								.info + ' ').status) || null,
-							place: console.log(boxen(' Location :'.info + $('p.location').text()
+							// returning the datas
+							name: console.log(' Name      :     '.info + $('h2.fn').text().toString()
+								.description, '\n') || null,
+
+							place: console.log(' Location  :     '.info + $('p.location').text()
 								.toString()
-								.info + ' ').status) || null,
-							bio: console.log(boxen(' Bio '.info + $('p.description').text().trim()
-								.replace('br', '').toString().info + ' ').status) || null,
-							twitter: $('a.accounts_twitter').attr('href') || null,
-							blogger: $('a.accounts_blogger').attr('href') || null
+								.description, '\n') || null,
+
+							bio: console.log(' Bio       :     '.info + $('p.description').text()
+									.trim().replace('<br>', '').toString().description, '\n') ||
+								null,
+
+							twitter: console.log(' Twitter   :     '.info + $(
+									'a.accounts_twitter')
+								.attr('href')
+								.toString().replace('http://twitter.com/', '').description, '\n'
+							) || null,
+
+							facebook: console.log(' Facebook  :     '.info + $(
+										'a.accounts_facebook').attr('href')
+									.toString().replace('http://facebook.com/', '').description,
+									'\n') ||
+								null,
+
+							blogger: console.log($('a.accounts_blogger').attr('href')) || null
 						};
 					}
 				});
