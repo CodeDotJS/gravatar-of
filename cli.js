@@ -162,16 +162,24 @@ request
 							twitter: console.log(' Twitter   :     '.info + $(
 									'a.accounts_twitter')
 								.attr('href')
-								.toString().replace('http://twitter.com/', '').description, '\n'
+								.toString().description, '\n'
 							) || null,
 
 							facebook: console.log(' Facebook  :     '.info + $(
 										'a.accounts_facebook').attr('href')
-									.toString().replace('https://www.facebook.com/', '').description,
+									.toString().description,
 									'\n') ||
 								null,
 
-							blogger: console.log($('a.accounts_blogger').attr('href')) || null
+							googlePlus: console.log(' Google +  :     '.info + $(
+								'a.accounts_google').attr('href')
+							.toString().description,
+							'\n') || null,
+
+							linkedIn: console.log(' LinkedIn  :     '.info + $(
+								'a.accounts_linkedin').attr('href')
+							.toString().description,
+							'\n') || null
 						};
 					}
 				});
@@ -219,16 +227,24 @@ request
 							twitter: console.log(' Twitter   :     '.info + $(
 									'a.accounts_twitter')
 								.attr('href')
-								.toString().replace('http://twitter.com/', '').description, '\n'
+								.toString().description, '\n'
 							) || null,
 
 							facebook: console.log(' Facebook  :     '.info + $(
 										'a.accounts_facebook').attr('href')
-									.toString().replace('http://facebook.com/', '').description,
+									.toString().description,
 									'\n') ||
 								null,
 
-							blogger: console.log($('a.accounts_blogger').attr('href')) || null
+							googlePlus: console.log(' Google +  :     '.info + $(
+								'a.accounts_google').attr('href')
+							.toString().description,
+							'\n') || null,
+
+							linkedIn: console.log(' LinkedIn  :     '.info + $(
+								'a.accounts_linkedin').attr('href')
+							.toString().description,
+							'\n') || null
 						};
 					}
 				});
@@ -239,3 +255,4 @@ request
 		/* do something */
 	}
 });
+// to be continued ... [ Maths examination on 14th of March]
