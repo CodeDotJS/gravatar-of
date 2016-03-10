@@ -29,7 +29,7 @@ $ image-of -u /rushforlinux@gmail.com -n rishi
                  -n    save image as [ unicorn ]        [required]
 
 
-    $ image-of -u /rushforlinux@gmail.com -n rishi 
+    $ image-of -u rushforlinux@gmail.com -n rishi 
 
     ❱ Internet Connection        :     ✔
 

@@ -148,35 +148,35 @@ request
 						const $ = cheerio.load(html);
 						return {
 							// returning the datas
-							name: console.log(' Name      :     '.info + $('h2.fn').text().toString()
+							name: console.log(' Name      :    '.info + $('h2.fn').text().toString()
 								.description, '\n') || null,
 
-							place: console.log(' Location  :     '.info + $('p.location').text()
+							place: console.log(' Location  :    '.info + $('p.location').text()
 								.toString()
 								.description, '\n') || null,
 
-							bio: console.log(' Bio       :     '.info + $('p.description').text()
+							bio: console.log(' Bio       :    '.info + $('p.description').text()
 									.trim().replace('<br>', '').toString().description, '\n') ||
 								null,
 
-							twitter: console.log(' Twitter   :     '.info + $(
+							twitter: console.log(' Twitter   :    '.info + $(
 									'a.accounts_twitter')
 								.attr('href')
 								.toString().description, '\n'
 							) || null,
 
-							facebook: console.log(' Facebook  :     '.info + $(
+							facebook: console.log(' Facebook  :    '.info + $(
 										'a.accounts_facebook').attr('href')
 									.toString().description,
 									'\n') ||
 								null,
 
-							googlePlus: console.log(' Google +  :     '.info + $(
+							googlePlus: console.log(' Google +  :    '.info + $(
 								'a.accounts_google').attr('href')
 							.toString().description,
 							'\n') || null,
 
-							linkedIn: console.log(' LinkedIn  :     '.info + $(
+							linkedIn: console.log(' LinkedIn  :    '.info + $(
 								'a.accounts_linkedin').attr('href')
 							.toString().description,
 							'\n') || null
@@ -213,35 +213,35 @@ request
 						const $ = cheerio.load(html);
 						return {
 							// returning the datas
-							name: console.log(' Name      :     '.info + $('h2.fn').text().toString()
+							name: console.log(' Name      :    '.info + $('h2.fn').text().toString()
 								.description, '\n') || null,
 
-							place: console.log(' Location  :     '.info + $('p.location').text()
+							place: console.log(' Location  :    '.info + $('p.location').text()
 								.toString()
 								.description, '\n') || null,
 
-							bio: console.log(' Bio       :     '.info + $('p.description').text()
+							bio: console.log(' Bio       :    '.info + $('p.description').text()
 									.trim().replace('<br>', '').toString().description, '\n') ||
 								null,
 
-							twitter: console.log(' Twitter   :     '.info + $(
+							twitter: console.log(' Twitter   :    '.info + $(
 									'a.accounts_twitter')
 								.attr('href')
 								.toString().description, '\n'
 							) || null,
 
-							facebook: console.log(' Facebook  :     '.info + $(
+							facebook: console.log(' Facebook  :    '.info + $(
 										'a.accounts_facebook').attr('href')
 									.toString().description,
 									'\n') ||
 								null,
 
-							googlePlus: console.log(' Google +  :     '.info + $(
+							googlePlus: console.log(' Google +  :    '.info + $(
 								'a.accounts_google').attr('href')
 							.toString().description,
 							'\n') || null,
 
-							linkedIn: console.log(' LinkedIn  :     '.info + $(
+							linkedIn: console.log(' LinkedIn  :    '.info + $(
 								'a.accounts_linkedin').attr('href')
 							.toString().description,
 							'\n') || null

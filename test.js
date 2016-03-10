@@ -12,3 +12,4 @@ test(async t => {
 
 	t.true(/down|up/.test(ret));
 });
+
