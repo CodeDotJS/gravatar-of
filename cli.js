@@ -8,7 +8,6 @@ const fs = require('fs');
 const http = require('follow-redirects').http;
 const mkdirp = require('mkdirp');
 const md5 = require('md5');
-// const Parse = require('jsonparse');
 const request = require('request');
 const boxen = require('boxen');
 const cheerio = require('cheerio');
@@ -145,8 +144,8 @@ request
 						'.png\n'.status);
 				}, 2000);
 			}).on('error', err => {
-				console.log(err);
-			});
+			console.log(err);
+		});
 		// Parsing the HTML content for getting user's data.
 		setTimeout(() => {
 			function getProfile() {
@@ -216,8 +215,8 @@ request
 						'.jpeg\n'.status);
 				}, 2000);
 			}).on('error', err => {
-				console.log(err);
-			});
+			console.log(err);
+		});
 		// Parsing the HTML content for getting user's data.
 		setTimeout(() => {
 			function getProfile() {

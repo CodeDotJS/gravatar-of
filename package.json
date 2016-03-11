@@ -5,7 +5,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/codedotjs/gravatar-of"
+    "url": "git+https://github.com/codedotjs/gravatar-of.git"
   },
   "author": "Rishi Giri <rushforlinux@gmail.com> (rishigiri.com)",
   "bin": {
@@ -39,9 +39,9 @@
     "follow-redirects": "*",
     "colors": "*",
     "mkdirp": "*",
-    "boxen":"*",
-    "md5":"*",
-    "request":"*",
+    "boxen": "*",
+    "md5": "*",
+    "request": "*",
     "yargs": "*"
   },
   "devDependencies": {
