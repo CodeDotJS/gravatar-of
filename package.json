@@ -1,6 +1,6 @@
 {
   "name": "gravatar-of",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Download profile picture and extract information of any gravatar user by it's email.",
   "license": "MIT",
   "repository": {
