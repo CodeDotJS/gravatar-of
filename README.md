@@ -28,31 +28,6 @@ $ gravatar-of -u unicorn@gmail.com -n unicorn
 
                  -n    save image as [ unicorn ]        [required]
 
-
-    $ gravatar-of -u rushforlinux@gmail.com -n rishi 
-
-    ❱ Internet Connection        :     ✔
-
-    ❱ Directory Created          :     ✔
-
-    ❱ Image Saved In             :     Gravatar ❱ rishi.jpeg
-
- Name         :   Rishi Giri (DotJS) 
-
- Location     :   Gorakhpur 
-
- Bio          :   JavaScript, Python and FOSS Enthusiast. Open Source Addict. I love developing and designig stuffs. 
-
- Twitter      :   @Rishi_Giri_ 
-
- Facebook     :   rishi.giri.90 
-
- Wordpress    :
-
- Google +     :   http://profiles.google.com/106157567815478859311 
-
- LinkedIn     :   https://www.linkedin.com/in/rishidotjs 
-
 ```
 ## Screenshot
 
