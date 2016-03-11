@@ -1,61 +1,61 @@
 {
-    "name": "gravatar-of",
-    "version": "1.0.1",
-    "description": "Download profile picture and extract information of any gravatar user by it's email.",
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/codedotjs/gravatar-of.git"
-    },
-    "author": "Rishi Giri <rushforlinux@gmail.com> (rishigiri.com)",
-    "bin": {
-        "gravatar-of": "cli.js"
-    },
-    "engines": {
-        "node": ">=4"
-    },
-    "scripts": {
-        "test": "xo && ava"
-    },
-    "files": [
-        "cli.js"
-    ],
-    "keywords": [
-        "cli-app",
-        "cli",
-        "image",
-        "image-of",
-        "terminal",
-        "directory",
-        "console",
-        "download",
-        "gravatar",
-        "wordpress",
-        "information"
-    ],
-    "dependencies": {
-        "fs": "*",
-        "url": "*",
-        "follow-redirects": "*",
-        "colors": "*",
-        "mkdirp": "*",
-        "boxen": "*",
-        "cheerio" : "*",
-        "md5": "*",
-        "request": "*",
-        "yargs": "*"
-    },
-    "devDependencies": {
-        "ava": "*",
-        "execa": "^0.2.2",
-        "xo": "*"
-    },
-    "xo": {
-        "esnext": true
-    },
-    "bugs": {
-        "url": "https://github.com/codedotjs/gravatar-of/issues"
-    },
-    "homepage": "https://github.com/codedotjs/gravatar-of#readme",
-    "main": "cli.js"
+  "name": "gravatar-of",
+  "version": "1.0.2",
+  "description": "Download profile picture and extract information of any gravatar user by it's email.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codedotjs/gravatar-of.git"
+  },
+  "author": "Rishi Giri <rushforlinux@gmail.com> (rishigiri.com)",
+  "bin": {
+    "gravatar-of": "cli.js"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "test": "xo && ava"
+  },
+  "files": [
+    "cli.js"
+  ],
+  "keywords": [
+    "cli-app",
+    "cli",
+    "image",
+    "image-of",
+    "terminal",
+    "directory",
+    "console",
+    "download",
+    "gravatar",
+    "wordpress",
+    "information"
+  ],
+  "dependencies": {
+    "fs": "*",
+    "url": "*",
+    "follow-redirects": "*",
+    "colors": "*",
+    "mkdirp": "*",
+    "boxen": "*",
+    "cheerio": "*",
+    "md5": "*",
+    "request": "*",
+    "yargs": "*"
+  },
+  "devDependencies": {
+    "ava": "*",
+    "execa": "^0.2.2",
+    "xo": "*"
+  },
+  "xo": {
+    "esnext": true
+  },
+  "bugs": {
+    "url": "https://github.com/codedotjs/gravatar-of/issues"
+  },
+  "homepage": "https://github.com/codedotjs/gravatar-of#readme",
+  "main": "cli.js"
 }
