@@ -15,7 +15,7 @@ $ npm install --global gravatar-of
 ## Usage
 
 ```
-$ image-of -u /rushforlinux@gmail.com -n rishi
+$ gravatar-of -u unicorn@gmail.com -n unicorn
 
 
   Usage
