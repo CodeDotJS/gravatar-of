@@ -31,7 +31,7 @@ $ gravatar-of -u unicorn@gmail.com -n unicorn
 ```
 ## Screenshot
 
-<img src="" alt="">
+<img src="http://rishigiri.com/github/gof.png" alt="">
 
 ## Related
 
