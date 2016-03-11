@@ -144,8 +144,8 @@ request
 						'.png\n'.status);
 				}, 2000);
 			}).on('error', err => {
-			console.log(err);
-		});
+				console.log(err);
+			});
 		// Parsing the HTML content for getting user's data.
 		setTimeout(() => {
 			function getProfile() {
@@ -215,8 +215,8 @@ request
 						'.jpeg\n'.status);
 				}, 2000);
 			}).on('error', err => {
-			console.log(err);
-		});
+				console.log(err);
+			});
 		// Parsing the HTML content for getting user's data.
 		setTimeout(() => {
 			function getProfile() {
@@ -271,4 +271,3 @@ request
 		/* do something */
 	}
 });
-// to be continued ... [ Maths examination on 14th of March]
