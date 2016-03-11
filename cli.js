@@ -157,42 +157,42 @@ request
 						const $ = cheerio.load(html);
 						return {
 							// returning the datas
-							name: console.log(' Name      :    '.info + $('h2.fn').text().toString()
+							name: console.log(' Name       :    '.info + $('h2.fn').text().toString()
 								.description, '\n') || null,
 
 							//
-							place: console.log(' Location  :    '.info + $('p.location').text()
+							place: console.log(' Location   :    '.info + $('p.location').text()
 								.toString()
 								.description, '\n') || null,
 
-							bio: console.log(' Bio       :    '.info + $('p.description').text()
+							bio: console.log(' Bio        :    '.info + $('p.description').text()
 									.trim().replace('<br>', '').toString().description, '\n') ||
 								null,
 
-							twitter: console.log(' Twitter   :    '.info + $(
+							twitter: console.log(' Twitter    :    '.info + $(
 									'a.accounts_twitter')
 								.text()
 								.toString().description, '\n'
 							) || null,
 
-							facebook: console.log(' Facebook  :    '.info + $(
+							facebook: console.log(' Facebook   :    '.info + $(
 										'a.accounts_facebook').text()
 									.toString().description,
 									'\n') ||
 								null,
 
-							wordpress: console.log(' Wordpress  :   '.info + $(
+							wordpress: console.log(' Wordpress   :   '.info + $(
 										'a.accounts_wordpress').text().toString().description,
 									'\n') ||
 								null,
 
 							// error parsing the data if url not found | better to remove
 							// color not provided
-							googlePlus: console.log(' Google +  :    '.info + $(
+							googlePlus: console.log(' Google +   :    '.info + $(
 									'a.accounts_google').attr('href'),
 								'\n') || null,
 
-							linkedIn: console.log(' LinkedIn  :    '.info + $(
+							linkedIn: console.log(' LinkedIn   :    '.info + $(
 									'a.accounts_linkedin').attr('href'),
 								'\n') || null
 						};
@@ -228,38 +228,38 @@ request
 						const $ = cheerio.load(html);
 						return {
 							// returning the datas
-							name: console.log(' Name      :    '.info + $('h2.fn').text().toString()
+							name: console.log(' Name       :    '.info + $('h2.fn').text().toString()
 								.description, '\n') || null,
 
-							place: console.log(' Location  :    '.info + $('p.location').text()
+							place: console.log(' Location   :    '.info + $('p.location').text()
 								.toString()
 								.description, '\n') || null,
 
-							bio: console.log(' Bio       :    '.info + $('p.description').text()
+							bio: console.log(' Bio        :    '.info + $('p.description').text()
 									.trim().replace('<br>', '').toString().description, '\n') ||
 								null,
 							// twitter name would be fine | instead URL
-							twitter: console.log(' Twitter   :    '.info + $(
+							twitter: console.log(' Twitter    :    '.info + $(
 									'a.accounts_twitter')
 								.text()
 								.toString().description, '\n'
 							) || null,
 
-							facebook: console.log(' Facebook  :    '.info + $(
+							facebook: console.log(' Facebook   :    '.info + $(
 										'a.accounts_facebook').text()
 									.toString().description,
 									'\n') ||
 								null,
-							wordpress: console.log(' Wordpress  :   '.info + $(
+							wordpress: console.log(' Wordpress   :   '.info + $(
 										'a.accounts_wordpress').text().toString().description,
 									'\n') ||
 								null,
 
-							googlePlus: console.log(' Google +  :    '.info + $(
+							googlePlus: console.log(' Google +   :    '.info + $(
 									'a.accounts_google').attr('href') || 'true',
 								'\n') || null,
 
-							linkedIn: console.log(' LinkedIn  :    '.info + $(
+							linkedIn: console.log(' LinkedIn   :    '.info + $(
 									'a.accounts_linkedin').attr('href'),
 								'\n') || null
 						};
