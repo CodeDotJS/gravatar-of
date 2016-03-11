@@ -71,6 +71,13 @@ function removeString(emailAddress) {
 }
 
 // removing the google.plus text from the url
+// the below function was used to parse url of googlePlus to show 'id', but since, while scrapping, if the id isn't found
+// the code breaks. Disabling it to show complete url instead.
+/*
+function removeURL(urlAddress) {
+		return urlAddress.replace(/\D/g,'');
+}
+*/
 
 // stored argument
 const replacedString = removeString(argv.u);
@@ -153,6 +160,7 @@ request
 							name: console.log(' Name      :    '.info + $('h2.fn').text().toString()
 								.description, '\n') || null,
 
+							//
 							place: console.log(' Location  :    '.info + $('p.location').text()
 								.toString()
 								.description, '\n') || null,
@@ -173,14 +181,20 @@ request
 									'\n') ||
 								null,
 
-							googlePlus: console.log(' Google +  :    '.info + parseInt($(
-								'a.accounts_google').text()).toString().replace(/\D/g,'').description,
-							'\n') || null,
+							wordpress: console.log(' Wordpress  :   '.info + $(
+										'a.accounts_wordpress').text().toString().description,
+									'\n') ||
+								null,
+
+							// error parsing the data if url not found | better to remove
+							// color not provided
+							googlePlus: console.log(' Google +  :    '.info + $(
+									'a.accounts_google').attr('href'),
+								'\n') || null,
 
 							linkedIn: console.log(' LinkedIn  :    '.info + $(
-								'a.accounts_linkedin').text()
-							.toString().description,
-							'\n') || null
+									'a.accounts_linkedin').attr('href'),
+								'\n') || null
 						};
 					}
 				});
@@ -224,7 +238,7 @@ request
 							bio: console.log(' Bio       :    '.info + $('p.description').text()
 									.trim().replace('<br>', '').toString().description, '\n') ||
 								null,
-
+							// twitter name would be fine | instead URL
 							twitter: console.log(' Twitter   :    '.info + $(
 									'a.accounts_twitter')
 								.text()
@@ -236,16 +250,18 @@ request
 									.toString().description,
 									'\n') ||
 								null,
+							wordpress: console.log(' Wordpress  :   '.info + $(
+										'a.accounts_wordpress').text().toString().description,
+									'\n') ||
+								null,
 
 							googlePlus: console.log(' Google +  :    '.info + $(
-								'a.accounts_google').text()
-							.toString().description,
-							'\n') || null,
+									'a.accounts_google').attr('href') || 'true',
+								'\n') || null,
 
 							linkedIn: console.log(' LinkedIn  :    '.info + $(
-								'a.accounts_linkedin').text()
-							.toString().description,
-							'\n') || null
+									'a.accounts_linkedin').attr('href'),
+								'\n') || null
 						};
 					}
 				});
