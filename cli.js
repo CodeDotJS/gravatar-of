@@ -44,26 +44,16 @@ function removeString(emailAddress) {
 	return emailAddress.replace(/\@.*/, '');
 }
 
-// removing the google.plus text from the url
-// the below function was used to parse url of googlePlus to show 'id', but since, while scrapping, if the id isn't found
-// the code breaks. Disabling it to show complete url instead.
-/*
-function removeURL(urlAddress) {
-		return urlAddress.replace(/\D/g,'');
-}
-*/
-
 // stored argument
 const replacedString = removeString(argv.u);
 
 mkdirp(removeSlash, err => {
 	if (err) {
-		console.error(boxen('  Failed to create the directory   ').error);
+		console.error('  Failed to create the directory   ');
 	} else { /* referred to another mkdirp */ }
 });
 
-console.log('\n  Fetching'.status, replacedString.toString().info, '\'s'.info,
-	'gravatar data.'.status);
+console.log(colors.cyan.bold('\n Downloading', replacedString, '\'s gravatar image...'));
 // requesting for image with hashed email address which was previously stored in 'usedAs'
 
 request
@@ -90,14 +80,13 @@ request
 			res => {
 				res.pipe(imageFile);
 				setTimeout(() => {
-					console.log('\n\t ❱ Image Saved In         :    '.directory +
-						forSaved.toString().status + ' ❱ ' + localFold.toString().status +
-						'.png\n'.status);
+					console.log('\n ❱ Image Saved In  :  ' +
+						forSaved.toString() + ' ❱ ' + localFold.toString() +
+						'.png\n');
 				}, 2000);
 			}).on('error', err => {
 				console.log(err);
 			});
-		// Parsing the HTML content for getting user's data.
 	} else {
 		/* something to be done | but no need */
 	}
@@ -108,9 +97,9 @@ request
 			res => {
 				res.pipe(imageFile);
 				setTimeout(() => {
-					console.log('\n\t ❱ Image Saved In         :    '.directory +
-						forSaved.toString().status + ' ❱ ' + localFold.toString().status +
-						'.jpeg\n'.status);
+					console.log('\n ❱ Image Saved In  :  ' +
+						forSaved + ' ❱ ' + localFold +
+						'.jpeg\n');
 				}, 2000);
 			}).on('error', err => {
 				console.log(err);
