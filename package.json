@@ -39,7 +39,7 @@
     "follow-redirects": "*",
     "colors": "*",
     "mkdirp": "*",
-    "updateNotifier": "*",
+    "update-notifier": "*",
     "md5": "*",
     "request": "*",
     "yargs": "*"
