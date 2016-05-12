@@ -71,6 +71,16 @@ mkdirp(removeSlash, err => {
 	}
 });
 
+// checking if the email is valid or not
+function checkEmail(emailString) {
+	const heckString = new RegExp('@.');
+	if (heckString.test(emailString) === true) {
+		return ['Valid Email'];
+	} else {
+		return ['Invalid Email'];
+	}
+}
+
 function checkInternet(cb) {
 	require('dns').lookup('gravatar.com', err => {
 		if (err && err.code === 'ENOTFOUND') {
@@ -83,9 +93,20 @@ function checkInternet(cb) {
 
 checkInternet(isConnected => {
 	if (isConnected) {
+		const checkPoint = checkEmail(argv.u);
+		let pointOne = ['Valid Email'];
+		let pointTwo = ['Invalid Email'];
+
+		if (checkPoint[0] === pointOne[0]) {
+			// do nothing
+		} else {
+			console.log(colors.red.bold('\n ❱ Valid email address  :   ✖\n'));
+
+			process.exit(1);
+		}
 		console.log(colors.cyan.bold('\n Downloading', replacedString, '\'s gravatar image...'));
 	} else {
-		console.log(colors.red.bold('\n ❱ Internet Connection   :   ✖\n'));
+		console.log(colors.red.bold('\n ❱ Internet Connection  j:   ✖\n'));
 
 		process.exit(1);
 	}
