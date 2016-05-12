@@ -11,31 +11,37 @@
 $ npm install --global gravatar-of
 
 ```
+__OR__
+```
+$ sudo npm install --global gravatar-of
+```
 
 ## Usage
 
 ```
-$ gravatar-of -u unicorn@gmail.com -n unicorn
+$ gravatar-of
 
+Usage : gravatar-of -u [email@id] -n [file name]
 
-  Usage
+Options:
 
-    $ gravatar-of
+	-u  ❱ Email-Id of any gravatar user                [required]
+	-n  ❱ Name of Image                                [required]
 
-              Options:
+Examples:
 
-                 -u    Email ID                         [required]
+	gravatar-of rushforlinux@gmail.com -n unicorn
 
-                 -n    save image as [ unicorn ]        [required]
+Missing required arguments: u, n
 
 ```
 ## Screenshot
 
-<img src="http://rishigiri.com/github/gof.png" alt="">
+![gravatar-of](http://rishigiri.com/github/gravatar-of.png)
 
 ## Related
 
-[Image-of](https://github.com/image-of)
+[Image-of](https://github.com/CodeDotJS/image-of)
 
 
 ## License
