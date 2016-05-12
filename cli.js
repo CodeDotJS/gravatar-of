@@ -2,21 +2,36 @@
 
 'use strict';
 
-/* dependencies */
-
 const fs = require('fs');
+
 const http = require('follow-redirects').http;
+
 const mkdirp = require('mkdirp');
+
 const md5 = require('md5');
+
 const request = require('request');
+
 const colors = require('colors/safe');
 
+const updateNotifier = require('update-notifier');
+
+const pkg = require('./package.json');
+
+updateNotifier({pkg}).notify();
+
 const argv = require('yargs')
+
 	.usage(colors.cyan.bold('\n Usage : $0 -u [email@id] -n [file name]'))
+
 	.demand(['u', 'n'])
+
 	.describe('u', '❱ Email-Id of any gravatar user')
+
 	.describe('n', '❱ Name of Image')
+
 	.example(colors.cyan.bold('\n$0 abc@gmail.com -n ab'))
+
 	.argv;
 
 const localFold = argv.n;
@@ -27,8 +42,7 @@ const hashEmail = md5(argv.u);
 // passed
 const usedAs = hashEmail;
 
-// defining directories
-// is the directory where the image will be saved
+// directory where the image will be saved
 const saveImage = './Gravatar/';
 
 // because I want to
@@ -49,12 +63,33 @@ const replacedString = removeString(argv.u);
 
 mkdirp(removeSlash, err => {
 	if (err) {
-		console.error('  Failed to create the directory   ');
-	} else { /* referred to another mkdirp */ }
+		process.exit(1);
+
+		console.log(err);
+	} else {
+		// no need
+	}
 });
 
-console.log(colors.cyan.bold('\n Downloading', replacedString, '\'s gravatar image...'));
-// requesting for image with hashed email address which was previously stored in 'usedAs'
+function checkInternet(cb) {
+	require('dns').lookup('gravatar.com', err => {
+		if (err && err.code === 'ENOTFOUND') {
+			cb(false);
+		} else {
+			cb(true);
+		}
+	});
+}
+
+checkInternet(isConnected => {
+	if (isConnected) {
+		console.log(colors.cyan.bold('\n Downloading', replacedString, '\'s gravatar image...'));
+	} else {
+		console.log(colors.red.bold('\n ❱ Internet Connection   :   ✖\n'));
+
+		process.exit(1);
+	}
+});
 
 request
 	.get('http://1.gravatar.com/avatar/' + usedAs)
@@ -80,12 +115,13 @@ request
 			res => {
 				res.pipe(imageFile);
 				setTimeout(() => {
-					console.log('\n ❱ Image Saved In  :  ' +
-						forSaved.toString() + ' ❱ ' + localFold.toString() +
-						'.png\n');
+					console.log(colors.cyan.bold('\n ❱ Image Saved In  :  ') + colors.green.bold(forSaved.toString() + ' ❱ ' + localFold.toString() + '.png\n'));
 				}, 2000);
 			}).on('error', err => {
+				process.exit(1);
+
 				console.log(err);
+
 			});
 	} else {
 		/* something to be done | but no need */
@@ -97,11 +133,11 @@ request
 			res => {
 				res.pipe(imageFile);
 				setTimeout(() => {
-					console.log('\n ❱ Image Saved In  :  ' +
-						forSaved + ' ❱ ' + localFold +
-						'.jpeg\n');
+					console.log(colors.cyan.bold('\n ❱ Image Saved In  :  ') + colors.green.bold(forSaved + ' ❱ ' + localFold + '.jpeg\n'));
 				}, 2000);
 			}).on('error', err => {
+				process.exit(1);
+
 				console.log(err);
 			});
 	} else {
