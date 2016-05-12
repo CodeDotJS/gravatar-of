@@ -9,39 +9,14 @@ const http = require('follow-redirects').http;
 const mkdirp = require('mkdirp');
 const md5 = require('md5');
 const request = require('request');
-const boxen = require('boxen');
-const cheerio = require('cheerio');
-const colors = require('colors');
-
-colors.setTheme({
-	directory: ['cyan', 'bold']
-});
-
-colors.setTheme({
-	description: ['green', 'bold']
-});
-
-colors.setTheme({
-	info: ['cyan', 'bold']
-});
-
-colors.setTheme({
-	status: ['green', 'bold']
-});
-
-colors.setTheme({
-	normal: ['red', 'bold']
-});
-
-colors.setTheme({
-	error: ['red', 'bold']
-});
+const colors = require('colors/safe');
 
 const argv = require('yargs')
-	.usage('\n Usage : $0 -u [email@id] -n [file name]'.info)
+	.usage(colors.cyan.bold('\n Usage : $0 -u [email@id] -n [file name]'))
 	.demand(['u', 'n'])
-	.describe('u', '❱'.status + ' Email-Id of any gravatar user')
-	.describe('n', '❱'.status + ' Name of Image')
+	.describe('u', '❱ Email-Id of any gravatar user')
+	.describe('n', '❱ Name of Image')
+	.example(colors.cyan.bold('\n$0 abc@gmail.com -n ab'))
 	.argv;
 
 const localFold = argv.n;
@@ -87,30 +62,6 @@ mkdirp(removeSlash, err => {
 	} else { /* referred to another mkdirp */ }
 });
 
-// loading lightweight page to check internet connection and creating directory based on the same process.
-request('http://rishigiri.com/gravatar/', (error, response) => {
-	if (!error && response.statusCode === 200) {
-		console.log('\n\t ❱ Internet Connection    :    '.directory + '✔'.status);
-		// another with same name
-		mkdirp(removeSlash, err => {
-			if (err) {
-				console.log(boxen('  Failed to create the directory   ').error);
-			} else {
-				setTimeout(() => {
-					console.log('\n\t ❱ Directory Created      :    '.directory + '✔'.status);
-				}, 1000);
-			}
-		});
-	} else {
-		// console when statusCode !== 200 or no internet connection
-		console.log('\n');
-		console.log(boxen('  ERROR : Please check your internet connection  ').error);
-		console.log('\n');
-		// stop the whole process
-		process.exit(1);
-	}
-});
-
 console.log('\n  Fetching'.status, replacedString.toString().info, '\'s'.info,
 	'gravatar data.'.status);
 // requesting for image with hashed email address which was previously stored in 'usedAs'
@@ -147,59 +98,6 @@ request
 				console.log(err);
 			});
 		// Parsing the HTML content for getting user's data.
-		setTimeout(() => {
-			function getProfile() {
-				request('http://en.gravatar.com/' + replacedString, (error, response,
-					html) => {
-					if (!error && response.statusCode === 200) {
-						// loading the whole HTML
-						const $ = cheerio.load(html);
-						return {
-							// returning the datas
-							name: console.log(' Name       :    '.info + $('h2.fn').text().toString()
-								.description, '\n') || null,
-
-							//
-							place: console.log(' Location   :    '.info + $('p.location').text()
-								.toString()
-								.description, '\n') || null,
-
-							bio: console.log(' Bio        :    '.info + $('p.description').text()
-									.trim().replace('<br>', '').toString().description, '\n') ||
-								null,
-
-							twitter: console.log(' Twitter    :    '.info + $(
-									'a.accounts_twitter')
-								.text()
-								.toString().description, '\n'
-							) || null,
-
-							facebook: console.log(' Facebook   :    '.info + $(
-										'a.accounts_facebook').text()
-									.toString().description,
-									'\n') ||
-								null,
-
-							wordpress: console.log(' Wordpress   :   '.info + $(
-										'a.accounts_wordpress').text().toString().description,
-									'\n') ||
-								null,
-
-							// error parsing the data if url not found | better to remove
-							// color not provided
-							googlePlus: console.log(' Google +   :    '.info + $(
-									'a.accounts_google').attr('href'),
-								'\n') || null,
-
-							linkedIn: console.log(' LinkedIn   :    '.info + $(
-									'a.accounts_linkedin').attr('href'),
-								'\n') || null
-						};
-					}
-				});
-			}
-			getProfile();
-		}, 5000);
 	} else {
 		/* something to be done | but no need */
 	}
@@ -217,56 +115,6 @@ request
 			}).on('error', err => {
 				console.log(err);
 			});
-		// Parsing the HTML content for getting user's data.
-		setTimeout(() => {
-			function getProfile() {
-				request('http://en.gravatar.com/' + replacedString, (error, response,
-					html) => {
-					if (!error && response.statusCode === 200) {
-						// loading the whole HTML
-						const $ = cheerio.load(html);
-						return {
-							// returning the datas
-							name: console.log(' Name       :    '.info + $('h2.fn').text().toString()
-								.description, '\n') || null,
-
-							place: console.log(' Location   :    '.info + $('p.location').text()
-								.toString()
-								.description, '\n') || null,
-
-							bio: console.log(' Bio        :    '.info + $('p.description').text()
-									.trim().replace('<br>', '').toString().description, '\n') ||
-								null,
-							// twitter name would be fine | instead URL
-							twitter: console.log(' Twitter    :    '.info + $(
-									'a.accounts_twitter')
-								.text()
-								.toString().description, '\n'
-							) || null,
-
-							facebook: console.log(' Facebook   :    '.info + $(
-										'a.accounts_facebook').text()
-									.toString().description,
-									'\n') ||
-								null,
-							wordpress: console.log(' Wordpress   :   '.info + $(
-										'a.accounts_wordpress').text().toString().description,
-									'\n') ||
-								null,
-
-							googlePlus: console.log(' Google +   :    '.info + $(
-									'a.accounts_google').attr('href') || 'true',
-								'\n') || null,
-
-							linkedIn: console.log(' LinkedIn   :    '.info + $(
-									'a.accounts_linkedin').attr('href'),
-								'\n') || null
-						};
-					}
-				});
-			}
-			getProfile();
-		}, 5000);
 	} else {
 		/* do something */
 	}
