@@ -1,9 +1,10 @@
 <h1 align="center">
 <img src="https://raw.githubusercontent.com/rishigiridotcom/rishigiri.com/gh-pages/github/gravatar.png"></img>
 <br>
+<center> gravatar-of </center>
 </h1>
 
-> Download profile picture and extract information of any gravatar user by it's email.
+> Download profile picture of any gravatar user by it's email.
 
 ## Install
 
@@ -42,6 +43,7 @@ Missing required arguments: u, n
 ## Related
 
 - [Image-of](https://github.com/CodeDotJS/image-of)
+
 - [Instavim](https://github.com/CodeDotJS/instavim)
 
 
