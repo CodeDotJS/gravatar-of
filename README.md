@@ -41,7 +41,8 @@ Missing required arguments: u, n
 
 ## Related
 
-[Image-of](https://github.com/CodeDotJS/image-of)
+- [Image-of](https://github.com/CodeDotJS/image-of)
+- [Instavim](https://github.com/CodeDotJS/instavim)
 
 
 ## License
