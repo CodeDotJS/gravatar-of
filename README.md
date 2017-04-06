@@ -1,10 +1,12 @@
 <h1 align="center">
+<br>
 <img src="https://raw.githubusercontent.com/rishigiridotcom/rishigiri.com/gh-pages/github/gravatar.png"></img>
 <br>
-<center> gravatar-of </center>
+<img src="https://travis-ci.org/CodeDotJS/gravatar-of.svg?branch=master">
+<img src="https://img.shields.io/badge/code_style-XO-5ed9c7.svg">
 </h1>
 
-> Download profile picture of any gravatar user by it's email.
+> Download profile picture of gravatar user by his/her email address!
 
 ## Install
 
@@ -12,39 +14,39 @@
 $ npm install --global gravatar-of
 
 ```
-__OR__
+__`OR`__
 ```
 $ sudo npm install --global gravatar-of
 ```
 
+## Demo
+
+<p align="center">
+<img src="media/ezgif-1-3b5324134a.gif">
+</p>
 ## Usage
 
 ```
-$ gravatar-of
+ Usage    :   gravatar-of [email-address] <size>
 
-Usage : gravatar-of -u [email@id] -n [file name]
+ Commands :
+  <size>      specify the image resolution after email
 
-Options:
+ Note     :   Defining resolution is optional
 
-	-u  ❱ Email-Id of any gravatar user                [required]
-	-n  ❱ Name of Image                                [required]
-
-Examples:
-
-	gravatar-of rushforlinux@gmail.com -n unicorn
-
-Missing required arguments: u, n
+ Help     :
+  $ gravatar-of user@gmail.com
+  $ gravatar-of user@gmail.com 400
 
 ```
-## Screenshot
-
-![gravatar-of](http://rishigiri.com/github/gravatar-of.png)
 
 ## Related
 
-- [Image-of](https://github.com/CodeDotJS/image-of)
+- __[`Image-of`](https://github.com/CodeDotJS/image-of) :__ `Download profile picture of any facebook user`
 
-- [Instavim](https://github.com/CodeDotJS/instavim)
+- __[`Instavim`](https://github.com/CodeDotJS/instavim) :__ `Download Instagram medias directly from command line`
+
+- __[`Twiger`](https://github.com/CodeDotJS/twiger) :__ `Download Twitter medias from command line`;
 
 
 ## License
