@@ -3,165 +3,99 @@
 'use strict';
 
 const fs = require('fs');
-
-const http = require('follow-redirects').http;
-
-const mkdirp = require('mkdirp');
-
-const md5 = require('md5');
-
-const request = require('request');
-
-const colors = require('colors/safe');
-
+const os = require('os');
+const dns = require('dns');
+const http = require('http');
+const imageType = require('image-type');
+const fse = require('fs-extra');
+const got = require('got');
+const chalk = require('chalk');
+const ora = require('ora');
+const logUpdate = require('log-update');
 const updateNotifier = require('update-notifier');
-
 const pkg = require('./package.json');
 
 updateNotifier({pkg}).notify();
 
-const argv = require('yargs')
+const inf = process.argv[2];
+const arg = process.argv[3] || 400;
+const pre = chalk.red.bold('›');
+const pos = chalk.cyan.bold('›');
+const dir = `${os.homedir()}/Gravatars/`;
+const spinner = ora();
+const image = Math.random().toString(15).substr(4, 8);
+// const email = /^([\w_\.\-\+])+\@([\w\-]+\.)+([\w]{2,10})+$/;
 
-	.usage(colors.cyan.bold('\n Usage : $0 -u [email@id] -n [file name]'))
+if (!inf) {
+	console.log(`
+  ${chalk.cyan('Usage')}    :   gravatar-of [email-address] ${chalk.dim('<size>')}
 
-	.demand(['u', 'n'])
+  ${chalk.cyan('Commands')} :
+   <size>      Define size to download image in provided resolution
 
-	.describe('u', '❱ Email-Id of any gravatar user')
+  ${chalk.cyan('Help')}     :
+   $ gravatar-of user@gmail.com
+   $ gravatar-of user@gmail.com ${chalk.dim('400')}
 
-	.describe('n', '❱ Name of Image')
-
-	.example(colors.cyan.bold('\n$0 abc@gmail.com -n ab'))
-
-	.argv;
-
-const localFold = argv.n;
-
-// hashing and storing the email
-const hashEmail = md5(argv.u);
-
-// passed
-const usedAs = hashEmail;
-
-// directory where the image will be saved
-const saveImage = './Gravatar/';
-
-// because I want to
-const removeSlash = saveImage.replace('./', '');
-
-// used where the directory is shown to the user
-const forSaved = removeSlash.replace('/', '');
-
-// finding username based on email address
-// will show the user's data only if the gravatar user name of a person is starting chars of his email before '@'
-function removeString(emailAddress) {
-	// removing everything after '@', basic strategy used by gravtar for username
-	return emailAddress.replace(/\@.*/, '');
+  ${chalk.dim('Note : Defining resolution is optional')}
+	`);
+	process.exit(1);
 }
 
-// stored argument
-const replacedString = removeString(argv.u);
-
-mkdirp(removeSlash, err => {
+fse.ensureDir(dir, err => {
 	if (err) {
 		process.exit(1);
-
-		console.log(err);
-	} else {
-		// no need
 	}
 });
 
-// checking if the email is valid or not
-function checkEmail(emailString) {
-	const heckString = new RegExp('@.');
-	if (heckString.test(emailString) === true) {
-		return ['Valid Email'];
-	} else {
-		return ['Invalid Email'];
-	}
-}
+logUpdate();
+spinner.text = 'Please wait!';
+spinner.start();
 
-function checkInternet(cb) {
-	require('dns').lookup('gravatar.com', err => {
-		if (err && err.code === 'ENOTFOUND') {
-			cb(false);
-		} else {
-			cb(true);
+dns.lookup('gravatar.com', err => {
+	if (err) {
+		logUpdate(`\n${pre} Please check your internet conenction!\n`);
+		process.exit(1);
+	} else {
+		logUpdate();
+		spinner.text = 'Almost there';
+	}
+});
+
+const download = (link, ext) => {
+	const save = fs.createWriteStream(dir + `${image}.${ext}`);
+	http.get(link, (res, cb) => {
+		res.pipe(save);
+		save.on('finish', () => {
+			save.close(cb);
+			logUpdate(`\n${pos} Image Saved! ${chalk.dim(`   [ ${image}.${ext} ]`)}\n`);
+			spinner.stop();
+		});
+	});
+};
+
+if (inf) {
+	const profile = `http://en.gravatar.com/${inf.split('@')[0]}.json`;
+	got(profile, {json: true}).then(res => {
+		const source = res.body;
+		const img = `${source.entry[0].thumbnailUrl}?size=${arg}`;
+
+		http.get(img, res => {
+			res.once('data', chunk => {
+				res.destroy();
+				const type = imageType(chunk).ext;
+				spinner.text = 'Downloading';
+				download(img, type);
+			});
+		});
+	}).catch(err => {
+		if (err) {
+			logUpdate(`\n${pre} ${chalk.dim('The given email is not associated with any account!')}\n`);
+			spinner.stop();
 		}
 	});
+} else {
+	logUpdate(`\n${pre} ${chalk.dim('Please provide a valid email address!')} \n`);
+	process.exit(1);
 }
 
-checkInternet(isConnected => {
-	if (isConnected) {
-		const checkPoint = checkEmail(argv.u);
-		let pointOne = ['Valid Email'];
-		let pointTwo = ['Invalid Email'];
-
-		if (checkPoint[0] === pointOne[0]) {
-			// do nothing
-		} else {
-			console.log(colors.red.bold('\n ❱ Valid email address  :   ✖\n'));
-
-			process.exit(1);
-		}
-		console.log(colors.cyan.bold('\n Downloading', replacedString, '\'s gravatar image...'));
-	} else {
-		console.log(colors.red.bold('\n ❱ Internet Connection  j:   ✖\n'));
-
-		process.exit(1);
-	}
-});
-
-request
-	.get('http://1.gravatar.com/avatar/' + usedAs)
-
-.on('response', response => {
-	// checking for the type of remote image.
-	const storeType = response.headers['content-type'];
-
-	// initially the result comes like image/.gif
-	// thus removing the 'image/' part
-	const parseType = storeType.toString().replace('image/', '');
-
-	// stored the possible extension in typeArray
-	const typeArray = ['png', 'jpeg', 'gif'];
-
-	// checking if the remote image is png
-	if (response.statusCode === 200 && typeArray[0] === parseType) {
-		// will save the image in the default defined directory
-		const imageFile = fs.createWriteStream(removeSlash + argv.n + '.png');
-
-		// started downloading image
-		http.get('http://1.gravatar.com/avatar/' + usedAs + '?size=400px',
-			res => {
-				res.pipe(imageFile);
-				setTimeout(() => {
-					console.log(colors.cyan.bold('\n ❱ Image Saved In  :  ') + colors.green.bold(forSaved.toString() + ' ❱ ' + localFold.toString() + '.png\n'));
-				}, 2000);
-			}).on('error', err => {
-				process.exit(1);
-
-				console.log(err);
-
-			});
-	} else {
-		/* something to be done | but no need */
-	}
-	// checking if the remote image if jpg/jpeg
-	if (response.statusCode === 200 && typeArray[1] === parseType) {
-		const imageFile = fs.createWriteStream(removeSlash + argv.n + '.jpeg');
-		http.get('http://1.gravatar.com/avatar/' + usedAs + '?size=400px',
-			res => {
-				res.pipe(imageFile);
-				setTimeout(() => {
-					console.log(colors.cyan.bold('\n ❱ Image Saved In  :  ') + colors.green.bold(forSaved + ' ❱ ' + localFold + '.jpeg\n'));
-				}, 2000);
-			}).on('error', err => {
-				process.exit(1);
-
-				console.log(err);
-			});
-	} else {
-		/* do something */
-	}
-});

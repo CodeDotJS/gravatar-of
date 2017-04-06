@@ -1,14 +1,14 @@
+import childProcess from 'child_process';
 import test from 'ava';
-import execa from 'execa';
 
-test(async t => {
-	let ret;
+test.cb(t => {
+	const cp = childProcess.spawn('./cli.js', ['rushforlinux@gmail.com'], {stdio: 'inherit'});
 
-	try {
-		ret = await execa('./cli.js');
-	} catch (err) {
-		ret = err.stderr;
-	}
+	cp.on('error', t.ifError);
 
-	t.true(/down|up/.test(ret));
+	cp.on('close', code => {
+		t.is(code, 0);
+		t.end();
+	});
 });
+
