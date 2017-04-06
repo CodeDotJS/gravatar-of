@@ -24,7 +24,7 @@ const pos = chalk.cyan.bold('›');
 const dir = `${os.homedir()}/Gravatars/`;
 const spinner = ora();
 const image = Math.random().toString(15).substr(4, 8);
-// const email = /^([\w_\.\-\+])+\@([\w\-]+\.)+([\w]{2,10})+$/;
+// Required: const email = /^([\w_\.\-\+])+\@([\w\-]+\.)+([\w]{2,10})+$/;
 
 if (!inf) {
 	console.log(`
