@@ -24,7 +24,7 @@ const pos = chalk.cyan.bold('›');
 const dir = `${os.homedir()}/Gravatars/`;
 const spinner = ora();
 const image = Math.random().toString(15).substr(4, 8);
-// Required: const email = /^([\w_\.\-\+])+\@([\w\-]+\.)+([\w]{2,10})+$/;
+const email = /^([\w_\.\-\+])+\@([\w\-]+\.)+([\w]{2,10})+$/;
 
 if (!inf) {
 	console.log(`
@@ -74,7 +74,7 @@ const download = (link, ext) => {
 	});
 };
 
-if (inf) {
+if (inf && email.test(inf) === true) {
 	const profile = `http://en.gravatar.com/${inf.split('@')[0]}.json`;
 	got(profile, {json: true}).then(res => {
 		const source = res.body;
@@ -83,9 +83,14 @@ if (inf) {
 		http.get(img, res => {
 			res.once('data', chunk => {
 				res.destroy();
-				const type = imageType(chunk).ext;
-				spinner.text = 'Downloading';
-				download(img, type);
+				const type = null ? imageType(chunk) : imageType(chunk).ext;
+				if (type === null) {
+					logUpdate(`\n${pre} Oops! Backend fetch failed\n`);
+					process.exit(1);
+				} else {
+					spinner.text = 'Downloading';
+					download(img, type);
+				}
 			});
 		});
 	}).catch(err => {
@@ -98,4 +103,3 @@ if (inf) {
 	logUpdate(`\n${pre} ${chalk.dim('Please provide a valid email address!')} \n`);
 	process.exit(1);
 }
-
