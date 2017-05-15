@@ -22,7 +22,7 @@ $ sudo npm install --global gravatar-of
 ## Demo
 
 <p align="center">
-<img src="media/ezgif-1-3b5324134a.gif">
+<img src="https://raw.githubusercontent.com/CodeDotJS/gravatar-of/master/media/ezgif-1-3b5324134a.gif">
 </p>
 ## Usage
 
