@@ -1,6 +1,6 @@
 {
   "name": "gravatar-of",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Download profile picture of any gravatar user by it's email.",
   "license": "MIT",
   "repository": {
